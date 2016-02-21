@@ -39,7 +39,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.4
-Release:        5.13%{?dist}
+Release:        5.14%{?dist}
 Epoch:          0
 Summary:        Content generation framework
 License:        ASL 2.0
@@ -59,50 +59,50 @@ BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}javapackages-tools
 BuildRequires:  %{?scl_prefix_java_common}ant
-BuildRequires:  maven30-plexus-cli
+BuildRequires:  %{?scl_prefix}plexus-cli
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-maven-assembly-plugin
-BuildRequires:  maven30-maven-compiler-plugin
-BuildRequires:  maven30-maven-install-plugin
-BuildRequires:  maven30-maven-jar-plugin
-BuildRequires:  maven30-maven-javadoc-plugin
-BuildRequires:  maven30-maven-resources-plugin
-BuildRequires:  maven30-maven-plugin-plugin
-BuildRequires:  maven30-maven-site-plugin
-BuildRequires:  maven30-maven-shade-plugin
-BuildRequires:  maven30-maven-surefire-plugin
-BuildRequires:  maven30-maven-reporting-impl
-BuildRequires:  maven30-maven-doxia-sitetools
-BuildRequires:  maven30-maven-doxia-tools
-BuildRequires:  maven30-modello
-BuildRequires:  maven30-plexus-classworlds
+BuildRequires:  %{?scl_prefix}maven-assembly-plugin
+BuildRequires:  %{?scl_prefix}maven-compiler-plugin
+BuildRequires:  %{?scl_prefix}maven-install-plugin
+BuildRequires:  %{?scl_prefix}maven-jar-plugin
+BuildRequires:  %{?scl_prefix}maven-javadoc-plugin
+BuildRequires:  %{?scl_prefix}maven-resources-plugin
+BuildRequires:  %{?scl_prefix}maven-plugin-plugin
+BuildRequires:  %{?scl_prefix}maven-site-plugin
+BuildRequires:  %{?scl_prefix}maven-shade-plugin
+BuildRequires:  %{?scl_prefix}maven-surefire-plugin
+BuildRequires:  %{?scl_prefix}maven-reporting-impl
+BuildRequires:  %{?scl_prefix}maven-doxia-sitetools
+BuildRequires:  %{?scl_prefix}maven-doxia-tools
+BuildRequires:  %{?scl_prefix}modello
+BuildRequires:  %{?scl_prefix}plexus-classworlds
 BuildRequires:  %{?scl_prefix_java_common}apache-commons-collections
 BuildRequires:  %{?scl_prefix_java_common}apache-commons-logging
-BuildRequires:  maven30-apache-commons-validator
-BuildRequires:  maven30-apache-commons-configuration
+BuildRequires:  %{?scl_prefix}apache-commons-validator
+BuildRequires:  %{?scl_prefix}apache-commons-configuration
 BuildRequires:  %{?scl_prefix_java_common}junit
 BuildRequires:  %{?scl_prefix_java_common}jakarta-oro
-BuildRequires:  maven30-plexus-i18n
-BuildRequires:  maven30-plexus-utils
-BuildRequires:  maven30-plexus-velocity
-BuildRequires:  maven30-plexus-build-api
-BuildRequires:  maven30-velocity
-BuildRequires:  maven30-fop
-BuildRequires:  maven30-plexus-containers-component-metadata
-BuildRequires:  maven30-plexus-containers-component-javadoc
-BuildRequires:  maven30-plexus-containers-container-default
+BuildRequires:  %{?scl_prefix}plexus-i18n
+BuildRequires:  %{?scl_prefix}plexus-utils
+BuildRequires:  %{?scl_prefix}plexus-velocity
+BuildRequires:  %{?scl_prefix}plexus-build-api
+BuildRequires:  %{?scl_prefix}velocity
+BuildRequires:  %{?scl_prefix}fop
+BuildRequires:  %{?scl_prefix}plexus-containers-component-metadata
+BuildRequires:  %{?scl_prefix}plexus-containers-component-javadoc
+BuildRequires:  %{?scl_prefix}plexus-containers-container-default
 BuildRequires:  %{?scl_prefix_java_common}httpcomponents-client
-BuildRequires:  maven30-httpcomponents-project
-BuildRequires:  maven30-xmlgraphics-commons
-BuildRequires:  maven30-avalon-framework
-BuildRequires:  maven30-geronimo-parent-poms
-BuildRequires:  maven30-geronimo-jms
+BuildRequires:  %{?scl_prefix}httpcomponents-project
+BuildRequires:  %{?scl_prefix}xmlgraphics-commons
+BuildRequires:  %{?scl_prefix}avalon-framework
+BuildRequires:  %{?scl_prefix}geronimo-parent-poms
+BuildRequires:  %{?scl_prefix}geronimo-jms
 BuildRequires:  %{?scl_prefix_java_common}javamail
 %if %{with itext}
-BuildRequires:  maven30-itext
+BuildRequires:  %{?scl_prefix}itext
 %endif
 %if %{with markdown}
-BuildRequires:  maven30-pegdown
+BuildRequires:  %{?scl_prefix}pegdown
 %endif
 
 
@@ -236,7 +236,7 @@ API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n doxia-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %patch1 -p1
 %patch2 -p1
@@ -260,7 +260,7 @@ set -e -x
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # tests disabled because some use old plexus-container and don't work
 # with new
@@ -268,7 +268,7 @@ set -e -x
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -343,6 +343,9 @@ set -e -x
 
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 0:1.4-5.14
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 0:1.4-5.13
 - maven33 rebuild
 
